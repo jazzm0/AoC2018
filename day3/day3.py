@@ -1,34 +1,30 @@
-class Cell:
-    id: str
-    value: int
-
-    def __init__(self):
-        self.value = 0
-        self.id = ''
-
-
 still_good = set()
 size = 1000
-fabric = [[Cell() for i in range(size)] for j in range(size)]
+size_range = list(range(1000))
+fabric = {}
+
+for i in size_range:
+    for j in size_range:
+        fabric[(i, j)] = {'id': "", "value": 0}
 
 
 def fill_fabric(k, start_x, start_y, length_x, length_y):
     for i in range(length_x):
         for j in range(length_y):
-            fabric[i + start_x][j + start_y].value += 1
-
-            if fabric[i + start_x][j + start_y].value > 1:
-                still_good.discard(fabric[i + start_x][j + start_y].id)
-
-            fabric[i + start_x][j + start_y].id = k
+            patch = fabric[(i + start_x, j + start_y)]
+            patch['value'] += 1
+            if patch['value'] > 1:
+                still_good.discard(patch['id'])
+            patch['id'] = k
 
 
 def count_fabric():
     count = 0
-    for i in range(size):
-        for j in range(size):
-            if fabric[i][j].value > 1:
-                still_good.discard(fabric[i][j].id)
+    for i in size_range:
+        for j in size_range:
+            patch = fabric[(i, j)]
+            if patch['value'] > 1:
+                still_good.discard(patch['id'])
                 count += 1
     return count
 
