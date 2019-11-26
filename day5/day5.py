@@ -1,5 +1,7 @@
 import re
 
+count = {}
+
 
 def do_react(a, b):
     return a.upper() == b.upper() and a != b
@@ -24,4 +26,12 @@ def reduce(to_be_reduced):
 
 with open('input') as ifile:
     for line in ifile:
-        print(len(reduce(line[:-1])))
+        line = line[:-1]
+        min_len = len(line)
+        for j in range(len(line)):
+            if count.get(line[j]) is None:
+                reduced = reduce(remove_reactive(line[j], line))
+                if len(reduced) < min_len:
+                    min_len = len(reduced)
+                count[line[j]] = len(reduced)
+        print(min_len)
