@@ -32,7 +32,7 @@ while has_changed:
     while x < length:
         y = x + 1
         while y < length:
-            if can_merge(coordinates[x], coordinates[y]) and coordinates[x] != coordinates[y]:
+            if can_merge(coordinates[x], coordinates[y]):
                 for z in coordinates[y]:
                     coordinates[x].add(z)
                 coordinates.remove(coordinates[y])
