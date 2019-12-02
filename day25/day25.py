@@ -3,7 +3,7 @@ coordinates = []
 
 def distance(a, b):
     d = 0
-    for i in range(3):
+    for i in range(4):
         d += abs(a[i] - b[i])
     return d <= 3
 
@@ -19,9 +19,9 @@ def can_merge(a, b):
 with open('input') as ifile:
     for line in ifile:
         line = line[:-1]
-        s = line.split(",")
+        s = [int(i) for i in line.split(",")]
         point = set()
-        point.add((int(s[0]), int(s[1]), int(s[2]), int(s[3])))
+        point.add((s[0], s[1], s[2], s[3]))
         coordinates.append(point)
 
 has_changed = True
@@ -38,7 +38,7 @@ while has_changed:
                 coordinates.remove(coordinates[y])
                 length = len(coordinates)
                 has_changed = True
-
-            y += 1
+            else:
+                y += 1
         x += 1
 print(len(coordinates))
