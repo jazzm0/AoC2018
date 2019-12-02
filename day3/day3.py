@@ -1,5 +1,4 @@
 still_good = set()
-size = 1000
 size_range = list(range(1000))
 fabric = {}
 
